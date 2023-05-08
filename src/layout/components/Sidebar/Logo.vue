@@ -15,7 +15,7 @@
 
 <script>
 export default {
-  name: 'SidebarLogo',
+  name: '相亲平台',
   props: {
     collapse: {
       type: Boolean,
