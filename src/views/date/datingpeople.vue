@@ -189,12 +189,6 @@
         label="居住地址">
       </el-table-column>
       <el-table-column
-        prop="workAddress"
-        header-align="center"
-        align="center"
-        label="工作地址">
-      </el-table-column>
-      <el-table-column
         prop="nation"
         header-align="center"
         align="center"
@@ -624,67 +618,60 @@
       getDataList () {
         this.searchParam.length = 0
         this.dataListLoading = true
-        this.searchParam.push({
-          column: 'name',
-          type: 'like',
-          // value: 'this.dataForm.name'
-          value: this.dataForm.name
-        },
-          {
-          column: 'sex',
-          type: 'like',
-          value:  this.dataForm.sex === "全部" ? "" : this.dataForm.sex
-          // sex: '男'
-      },
-          {
-            column: 'marriageOption',
-            type: 'like',
-            value:  this.dataForm.MarriageOption
-            // value:  '未婚'
-            // sex: '男'
-          }
-          ,
-          {
-            column: 'workAddress',
-            type: 'like',
-            value:  this.dataForm.address
-            // value:  '新都区'
-            // sex: '男'
-          }
-      )
-        if (this.dataForm.worksalaryOption === "不限" || this.dataForm.worksalaryOption === "保密" || this.dataForm.worksalaryOption === "") {
-
-        } else if (this.dataForm.worksalaryOption === "2000以下") {
-          this.searchParam.push(
-            {
-              column: 'monthIncome',
-              type: 'le',
-              value:  this.dataForm.worksalaryOption
-            }
-          )
-        } else if (this.dataForm.worksalaryOption === "50000以上") {
-          this.searchParam.push(
-            {
-              column: 'monthIncome',
-              type: 'ge',
-              value:  this.dataForm.worksalaryOption
-            }
-          )
-        } else {
-          this.searchParam.push(
-            {
-              column: 'monthIncome',
-              type: 'le',
-              value:  this.dataForm.worksalaryOption.split("-")[1]
-            }
-            ,
-            {
-              column: 'monthIncome',
-              type: 'gt',
-              value:  this.dataForm.worksalaryOption.split("-")[0]
-            }
-          )
-        }
+      //   this.searchParam.push({
+      //     column: 'name',
+      //     type: 'like',
+      //     // value: 'this.dataForm.name'
+      //     value: this.dataForm.name
+      //   },
+      //     {
+      //     column: 'sex',
+      //     type: 'like',
+      //     value:  this.dataForm.sex === "全部" ? "" : this.dataForm.sex
+      //     // sex: '男'
+      // },
+      //     {
+      //       column: 'marriageOption',
+      //       type: 'like',
+      //       value:  this.dataForm.MarriageOption
+      //       // value:  '未婚'
+      //       // sex: '男'
+      //     }
+      //     ,
+      // )
+      //   if (this.dataForm.worksalaryOption === "不限" || this.dataForm.worksalaryOption === "保密" || this.dataForm.worksalaryOption === "") {
+      //
+      //   } else if (this.dataForm.worksalaryOption === "2000以下") {
+      //     this.searchParam.push(
+      //       {
+      //         column: 'monthIncome',
+      //         type: 'le',
+      //         value:  this.dataForm.worksalaryOption
+      //       }
+      //     )
+      //   } else if (this.dataForm.worksalaryOption === "50000以上") {
+      //     this.searchParam.push(
+      //       {
+      //         column: 'monthIncome',
+      //         type: 'ge',
+      //         value:  this.dataForm.worksalaryOption
+      //       }
+      //     )
+      //   } else {
+      //     this.searchParam.push(
+      //       {
+      //         column: 'monthIncome',
+      //         type: 'le',
+      //         value:  this.dataForm.worksalaryOption.split("-")[1]
+      //       }
+      //       ,
+      //       {
+      //         column: 'monthIncome',
+      //         type: 'gt',
+      //         value:  this.dataForm.worksalaryOption.split("-")[0]
+      //       }
+      //     )
+      //   }
         console.log("***************",this.dataForm.worksalaryOption)
         console.log("1111111111111111",this.dataForm.address)
         console.log(this.searchParam)
@@ -697,17 +684,21 @@
             worksalaryOption: this.dataForm.worksalaryOption,
             condition: JSON.stringify(this.searchParam)
           }
-        })
-          .then((reponse) => {
-          if (data && data.code === 0) {
-            this.dataList = data.page.list
-            this.totalPage = data.page.totalCount
-          } else {
+        }).then(( response ) => {
+            console.log("222222222222222222222")
+            debugger
+            console.log(response)
+          if (response && response.code === 20000) {
+            this.dataList = response.page.list
+            console.log(this.dataList)
+            this.totalPage = response.page.totalCount
+            } else {
             this.dataList = []
             this.totalPage = 0
-          }
-          this.dataListLoading = false
-        })
+            }
+            this.dataListLoading = false
+          })
+
       },
       onChangeProv (e) {
         console.log("省", e);

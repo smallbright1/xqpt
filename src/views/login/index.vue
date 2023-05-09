@@ -3,7 +3,7 @@
     <el-form ref="loginForm" :model="loginForm" :rules="loginRules" class="login-form" auto-complete="on" label-position="left">
 
       <div class="title-container">
-        <h3 class="title">欢迎来小区相亲平台</h3>
+        <h3 class="title">欢迎来到小区相亲平台</h3>
       </div>
 
       <el-form-item prop="userName">
@@ -71,9 +71,19 @@ export default {
     }
     return {
       loginForm: {
-        userName: encrypt(this.loginForm.userName),
-        password: encrypt(this.loginForm.password)
+        username: 'lfAy03CnANhLzCsdfPe12g==',
+        password: 'aqihrgZtWeiJAJTgOJ__bw=='
       },
+      loginForms: {
+        username: 'lfAy03CnANhLzCsdfPe12g==',
+        password: 'aqihrgZtWeiJAJTgOJ__bw=='
+      },
+      // userName:'',
+      // password:'',
+      // loginForm: {
+      //   userName: encrypt(this.loginForm.userName),
+      //   password: encrypt(this.loginForm.password)
+      // },
 
       loginRules: {
         userName: [{ required: true, trigger: 'blur', validator: validateUsername }],
@@ -103,15 +113,12 @@ export default {
         this.$refs.password.focus()
       })
     },
+
     handleLogin() {
-
       this.$refs.loginForm.validate(valid => {
-        // username: encrypt(this.dataForm.userName),
-        //   password: encrypt(this.dataForm.password)
         if (valid) {
-
           this.loading = true
-          this.$store.dispatch('user/login',this.loginForm).then(() => {
+          this.$store.dispatch('user/login', this.loginForm).then(() => {
             this.$router.push({ path: this.redirect || '/' })
             this.loading = false
           }).catch(() => {
@@ -123,6 +130,34 @@ export default {
         }
       })
     }
+    // handleLogin() {
+    //
+    //   this.$refs.loginForm.validate(valid => {
+    //     // username: encrypt(this.dataForm.userName),
+    //     //   password: encrypt(this.dataForm.password)
+    //     if (valid) {
+    //       console.log('11111111111111111111')
+    //
+    //       console.log(encrypt('scxn'))
+    //       console.log(encrypt('Scxn2010'))
+    //       console.log(this.loginForm.username)
+    //       console.log(this.loginForm.password)
+    //       this.$router.push({ path: this.redirect || '/' })
+    //       this.loading = true
+    //
+    //       this.$store.dispatch('user/login',this.loginForms).then(() => {
+    //         // alert("111111")
+    //         this.$router.push({ path: this.redirect || '/' })
+    //         this.loading = false
+    //       }).catch(() => {
+    //         this.loading = false
+    //       })
+    //     } else {
+    //       console.log('error submit!!')
+    //       return false
+    //     }
+    //   })
+    // }
   }
 }
 </script>
